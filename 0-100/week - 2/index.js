@@ -43,7 +43,8 @@
 //   });
 //   return p;
 // }
-
+// let a =  myOwnSetTimout(1000); log -> promise pending.
+//
 // myOwnSetTimeout(1000).then(() => {
-//   console.log("log it first ");
+//   console.log("log it first "); log -> promise completed.
 // });
