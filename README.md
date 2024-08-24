@@ -1,1 +1,1 @@
-<b> watch me get a intership complete journey </b>
+<b> Watch me get an internship complete journey </b>
