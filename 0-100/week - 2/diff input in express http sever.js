@@ -26,6 +26,8 @@ app.get("/", function (req, res) {
   res.json(msg); // -> ex - > {"hii" : "there"}
 });
 //--------------------------------------------------------------------------------------------------------------------------
+HEADER also
+
 
 app.listen(port, () => {
   console.log(`Server started in the ${port}`);
