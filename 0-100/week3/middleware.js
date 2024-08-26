@@ -7,6 +7,7 @@
 // const app = express();
 // const port = 3000;
 // app.use(express.json());
+
 // app.get("/", (req, res) => {
 //   const kidneyId = req.query.ID;
 //   const username = req.headers.username;
@@ -26,32 +27,69 @@
 // });
 
 // - insted of repeating code we can do this make a function and check for all the validations.
+
+// const express = require("express");
+// const app = express();
+// const port = 3000;
+
+// app.use(express.json()); // To parse JSON request bodies
+
+// function userNameChecker(username, pass) {
+//   return username === "aditya" && pass === "pass";
+// }
+
+// app.get("/", (req, res) => {
+//   const { username, pass } = req.headers;
+
+//   if (!username || !pass) {
+//     res.status(400).json({ msg: "Username and password are required" });
+//     return;
+//   }
+
+//   if (!userNameChecker(username, pass)) {
+//     res.status(403).json({ msg: "Invalid user" });
+//     return;
+//   }
+
+//   res.status(200).json({ msg: "Welcome, authenticated user!" });
+// });
+
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
+
+//-----------------------------better code down-------------------------------------------
 const express = require("express");
 const app = express();
-const port = 3000;
 
-app.use(express.json()); // To parse JSON request bodies
-
-function userNameChecker(username, pass) {
-  return username === "aditya" && pass === "pass";
+function userMiddleware(req, res, next) {
+  const { username, pass } = req.headers;
+  if (username !== "aditya" || pass !== "pass") {
+    res.status(403).json({
+      msg: "Invalid user",
+    });
+  } else {
+    next();
+  }
 }
 
-app.get("/", (req, res) => {
-  const { username, pass } = req.headers;
-
-  if (!username || !pass) {
-    res.status(400).json({ msg: "Username and password are required" });
-    return;
+function kidneyMiddleware(req, res, next) {
+  const kidneyID = parseInt(req.query.ID, 10);
+  if (kidneyID !== 1 && kidneyID !== 2) {
+    res.status(400).json({
+      msg: "Invalid input",
+    });
+  } else {
+    next();
   }
+}
 
-  if (!userNameChecker(username, pass)) {
-    res.status(403).json({ msg: "Invalid user" });
-    return;
-  }
-
-  res.status(200).json({ msg: "Welcome, authenticated user!" });
+app.get("/", userMiddleware, kidneyMiddleware, (req, res) => {
+  res.send("Your kidney is fine");
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
 });
+
+//output -> your kidnet is fine with query = 1 , headers = aditya , pass
