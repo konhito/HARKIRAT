@@ -27,6 +27,11 @@ app.get("/", function (req, res) {
 });
 //--------------------------------------------------------------------------------------------------------------------------
 HEADER also
+app.get("/", (req, res) => {
+  const kidneyId = req.query.ID;
+  const username = req.headers.username;
+  const pass = req.headers.pass;
+  console.log(username);
 
 
 app.listen(port, () => {
