@@ -54,4 +54,11 @@ app.get("/", (req, res) => {
   res.send(`${cnt}`);
 });
 
+//Global catches  -> its like a error detection when we messed up the logic and left a test case untoched.
+app.use(function (err, req, res, next) {
+  res.json({
+    msg: "Sorry something is up with your server",
+  });
+});
+
 app.listen(3000);
