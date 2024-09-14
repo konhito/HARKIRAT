@@ -7,6 +7,8 @@ export default {
         blue: {
           700: "#146eb4",
         },
+        cardcol: "#2163af",
+        cardcoldown: "#19477e",
       },
     },
   },
