@@ -11,7 +11,7 @@ const Form = () => {
 
   function pushInArray(e) {
     let obj = { name: e };
-    setData((prevData) => [...prevData, obj]);
+    setData((prevData) => [...prevData, obj]); //insertions
   }
 
   function inputNameChange(e) {
@@ -23,8 +23,8 @@ const Form = () => {
   }
 
   function deleteName(indexToDelete) {
-    setData((prevData) =>
-      prevData.filter((_, index) => index !== indexToDelete)
+    setData(
+      (prevData) => prevData.filter((_, index) => index !== indexToDelete) //deletion
     );
   }
 
